@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    algorithms (1.0.0)
+
+PLATFORMS
+  x86_64-darwin-19
+
+DEPENDENCIES
+  algorithms (~> 1.0)
+
+BUNDLED WITH
+   2.2.32
