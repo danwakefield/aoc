@@ -1,32 +1,40 @@
 #!/usr/bin/env ruby
 
+def beats(x)
+  ((x + 1) % 3)
+end
+
+def loses(x)
+  ((x + 2) % 3)
+end
+
 def part1(data)
   data.sum do |a, b|
     if a == b
-      b + 3 + 1
-    elsif b == ((a + 1) % 3)
-      b + 6 + 1
+      b + 3
+    elsif b == beats(a)
+      b + 6
     else
-      b + 1
+      b
     end
-  end
+  end + data.length
 end
 
 def part2(data)
   data.sum do |a, b|
     case b
     when 0 # lose
-      ((a + 2) % 3) + 1
+      loses(a)
     when 1 # draw
-      a + 3 + 1
+      a + 3
     when 2 # win
-      6 + ((a + 1) % 3) + 1
+      6 + beats(a)
     end
-  end
+  end + data.length
 end
 
 # Instead of using 1-3 for Rock, paper, scissors; shift them down 1 so Mod 3
-# works and just add 1 to every score
+# works and just add 1 (data.length) to every score
 VALUES = {
   'A' => 0,
   'B' => 1,
@@ -35,7 +43,6 @@ VALUES = {
   'Y' => 1,
   'Z' => 2
 }
-
 
 data = IO.readlines(ARGV[0], chomp: true)
 data = data.map { _1.split.map(&VALUES.to_proc) }
